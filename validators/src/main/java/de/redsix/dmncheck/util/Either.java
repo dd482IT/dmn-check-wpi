@@ -40,7 +40,7 @@ public abstract class Either<A, B> {
     public abstract int hashCode();
 
     @Override
-    public abstract boolean equals(@Nullable Object obj);
+    public abstract boolean equals(Object obj);
 
     @Override
     public abstract String toString();
