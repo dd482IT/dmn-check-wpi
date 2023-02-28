@@ -1,0 +1,32 @@
+package de.redsix.dmncheck.validators.core;
+
+import de.redsix.dmncheck.drg.RequirementGraph;
+import de.redsix.dmncheck.result.ValidationResult;
+import org.camunda.bpm.model.dmn.DmnModelInstance;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * Generic validator that facilitates writing validations on graph-based representation of the DMN model instance.
+ */
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.regex.RegexChecker")
+public abstract class RequirementGraphValidator implements Validator {
+
+    /**
+     * Returns a list of validation results for a requirement graph (see {@link RequirementGraph}).
+     *
+     * @param drg Requirement graph used for validation
+     * @return A possibly empty list of validation results
+     */
+    @org.checkerframework.dataflow.qual.Pure
+    protected abstract List<ValidationResult> validate( RequirementGraphValidator this,  RequirementGraph drg);
+
+    public  List<ValidationResult> apply( RequirementGraphValidator this,  DmnModelInstance dmnModelInstance) {
+        try {
+            final RequirementGraph requirementGraph = RequirementGraph.from(dmnModelInstance);
+            return validate(requirementGraph);
+        } catch (IllegalArgumentException exception) {
+            return Collections.singletonList(ValidationResult.init.message("Error while construction requirement graph: " + exception.getMessage()).element(dmnModelInstance.getDefinitions()).build());
+        }
+    }
+}

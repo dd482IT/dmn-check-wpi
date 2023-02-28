@@ -1,0 +1,10 @@
+package de.redsix.dmncheck.result;
+
+/**
+ * The severity of a validation result.
+ */
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.nullness.NullnessChecker")
+public enum Severity {
+
+    WARNING, ERROR
+}

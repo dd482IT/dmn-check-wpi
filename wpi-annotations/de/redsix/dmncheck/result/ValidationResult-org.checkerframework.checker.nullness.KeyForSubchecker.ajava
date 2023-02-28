@@ -1,0 +1,140 @@
+package de.redsix.dmncheck.result;
+
+import org.camunda.bpm.model.xml.instance.ModelElementInstance;
+
+/**
+ * A validation result consists of the following:
+ *
+ *  1) A message that describes the validation result
+ *  2) A severity indicating how severe the result is
+ *  3) A reference to the DMN element that caused result
+ *
+ * In this context a validation result always describes
+ * an error or a warning. There is currently no way to
+ * express positive validation results, except returning
+ * no validation results at all.
+ */
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.nullness.KeyForSubchecker")
+public class ValidationResult {
+
+    private final  Severity severity;
+
+    private final  String message;
+
+    private final  ModelElementInstance element;
+
+    private ValidationResult(final  String message, final  ModelElementInstance element, final  Severity severity) {
+        this.message = message;
+        this.element = element;
+        this.severity = severity;
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public  Severity getSeverity() {
+        return severity;
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public  String getMessage() {
+        return message;
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public  ModelElementInstance getElement() {
+        return element;
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public  String toString( ValidationResult this) {
+        return message;
+    }
+
+    public static final Builder. MessageStep init = message -> (new Builder.SeverityStep() {
+
+        private  Severity severity = Severity.ERROR;
+
+        public Builder. BuildStep element( ModelElementInstance element) {
+            return new Builder.BuildStep() {
+
+                @org.checkerframework.dataflow.qual.Pure
+                public  ModelElementInstance getElement() {
+                    return element;
+                }
+
+                @org.checkerframework.dataflow.qual.Pure
+                public  Severity getSeverity() {
+                    return severity;
+                }
+
+                @org.checkerframework.dataflow.qual.Pure
+                public  String getMessage() {
+                    return message;
+                }
+
+                public  ValidationResult build() {
+                    return new ValidationResult(message, element, severity);
+                }
+            };
+        }
+
+        @org.checkerframework.dataflow.qual.Pure
+        public  Severity getSeverity() {
+            return severity;
+        }
+
+        public Builder. ElementStep severity( Severity severity) {
+            this.severity = severity;
+            return this;
+        }
+
+        @org.checkerframework.dataflow.qual.Pure
+        public  String getMessage() {
+            return message;
+        }
+    });
+
+    public static final class Builder {
+
+        public interface MessageStep {
+
+            @org.checkerframework.dataflow.qual.Pure
+            SeverityStep message( MessageStep this,  String message);
+        }
+
+        public interface SeverityStep extends ElementStep {
+
+            @org.checkerframework.dataflow.qual.Pure
+             ElementStep severity(Severity severity);
+
+            @org.checkerframework.dataflow.qual.Pure
+             String getMessage();
+        }
+
+        public interface ElementStep {
+
+            @org.checkerframework.dataflow.qual.Pure
+             BuildStep element( ElementStep this,  ModelElementInstance element);
+
+            @org.checkerframework.dataflow.qual.Pure
+             Severity getSeverity();
+
+            @org.checkerframework.dataflow.qual.Pure
+             String getMessage();
+        }
+
+        public interface BuildStep {
+
+            @org.checkerframework.dataflow.qual.Pure
+             ModelElementInstance getElement();
+
+            @org.checkerframework.dataflow.qual.Pure
+             Severity getSeverity();
+
+            @org.checkerframework.dataflow.qual.Pure
+             String getMessage();
+
+            @org.checkerframework.dataflow.qual.Pure
+             ValidationResult build( BuildStep this);
+        }
+    }
+}

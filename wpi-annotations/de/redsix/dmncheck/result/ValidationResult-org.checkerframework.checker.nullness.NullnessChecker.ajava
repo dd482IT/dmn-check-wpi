@@ -1,0 +1,140 @@
+package de.redsix.dmncheck.result;
+
+import org.camunda.bpm.model.xml.instance.ModelElementInstance;
+
+/**
+ * A validation result consists of the following:
+ *
+ *  1) A message that describes the validation result
+ *  2) A severity indicating how severe the result is
+ *  3) A reference to the DMN element that caused result
+ *
+ * In this context a validation result always describes
+ * an error or a warning. There is currently no way to
+ * express positive validation results, except returning
+ * no validation results at all.
+ */
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.nullness.NullnessChecker")
+public class ValidationResult {
+
+    private final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Severity severity;
+
+    private final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull String message;
+
+    private final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ModelElementInstance element;
+
+    private ValidationResult(final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull String message, final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ModelElementInstance element, final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Severity severity) {
+        this.message = message;
+        this.element = element;
+        this.severity = severity;
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Severity getSeverity() {
+        return severity;
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull String getMessage() {
+        return message;
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ModelElementInstance getElement() {
+        return element;
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull String toString(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ValidationResult this) {
+        return message;
+    }
+
+    public static final Builder.@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull MessageStep init = message -> (new Builder.SeverityStep() {
+
+        private @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Severity severity = Severity.ERROR;
+
+        public Builder.@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull BuildStep element(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ModelElementInstance element) {
+            return new Builder.BuildStep() {
+
+                @org.checkerframework.dataflow.qual.Pure
+                public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ModelElementInstance getElement() {
+                    return element;
+                }
+
+                @org.checkerframework.dataflow.qual.Pure
+                public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Severity getSeverity() {
+                    return severity;
+                }
+
+                @org.checkerframework.dataflow.qual.Pure
+                public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull String getMessage() {
+                    return message;
+                }
+
+                public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ValidationResult build() {
+                    return new ValidationResult(message, element, severity);
+                }
+            };
+        }
+
+        @org.checkerframework.dataflow.qual.Pure
+        public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Severity getSeverity() {
+            return severity;
+        }
+
+        public Builder.@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ElementStep severity(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Severity severity) {
+            this.severity = severity;
+            return this;
+        }
+
+        @org.checkerframework.dataflow.qual.Pure
+        public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull String getMessage() {
+            return message;
+        }
+    });
+
+    public static final class Builder {
+
+        public interface MessageStep {
+
+            @org.checkerframework.dataflow.qual.Pure
+            SeverityStep message(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull String message);
+        }
+
+        public interface SeverityStep extends ElementStep {
+
+            @org.checkerframework.dataflow.qual.Pure
+            @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ElementStep severity(Severity severity);
+
+            @org.checkerframework.dataflow.qual.Pure
+            @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull String getMessage();
+        }
+
+        public interface ElementStep {
+
+            @org.checkerframework.dataflow.qual.Pure
+            @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull BuildStep element(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ModelElementInstance element);
+
+            @org.checkerframework.dataflow.qual.Pure
+            @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Severity getSeverity();
+
+            @org.checkerframework.dataflow.qual.Pure
+            @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull String getMessage();
+        }
+
+        public interface BuildStep {
+
+            @org.checkerframework.dataflow.qual.Pure
+            @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ModelElementInstance getElement();
+
+            @org.checkerframework.dataflow.qual.Pure
+            @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Severity getSeverity();
+
+            @org.checkerframework.dataflow.qual.Pure
+            @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull String getMessage();
+
+            @org.checkerframework.dataflow.qual.Pure
+            @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ValidationResult build();
+        }
+    }
+}
