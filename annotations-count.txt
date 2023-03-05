@@ -1,0 +1,35 @@
+@Pure :
+@SideEffectFree :
+@Deterministic :
+@RequiresQualifier :
+@EnsuresQualifer :
+@RequiresQualifierIf :
+@EnsuresQualiferIf :
+@Nullable :
+server/src/main/java/de/redsix/dmncheck/server/ValidationServer.java:1
+validators/src/main/java/de/redsix/dmncheck/feel/FeelExpression.java:1
+validators/src/main/java/de/redsix/dmncheck/feel/ExpressionType.java:1
+validators/src/main/java/de/redsix/dmncheck/util/TopLevelExpressionLanguage.java:2
+validators/src/main/java/de/redsix/dmncheck/util/ValidatorLoader.java:2
+validators/src/main/java/de/redsix/dmncheck/util/ProjectClassLoader.java:1
+validators/src/main/java/de/redsix/dmncheck/util/Expression.java:3
+validators/src/main/java/de/redsix/dmncheck/util/Either.java:1
+@NonNull :
+core/src/main/java/de/redsix/dmncheck/validators/core/ValidationContext.java:1
+@PolyNull :
+@MonotonicNonNull :
+validators/src/main/java/de/redsix/dmncheck/util/ValidatorLoader.java:1
+@RequiresNonNull :
+@EnsuresNonNull :
+@EnsuresNonNullIf :
+@Regex :
+core/src/main/java/de/redsix/dmncheck/drg/RequirementGraph.java:2
+@PolyRegex :
+@UnknownRegex :
+core/src/main/java/de/redsix/dmncheck/drg/RequirementGraph.java:5
+@RegexBottom :
+core/src/main/java/de/redsix/dmncheck/drg/RequirementGraph.java:2
+@Format :
+@InvalidFormat :
+@FormatBottom :
+@UnknownFormat :
