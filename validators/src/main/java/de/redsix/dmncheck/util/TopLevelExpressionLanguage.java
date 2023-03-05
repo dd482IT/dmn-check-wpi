@@ -6,10 +6,9 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 public class TopLevelExpressionLanguage {
 
-    @Nullable
     public final String topLevelExpressionLanguage;
 
-    public TopLevelExpressionLanguage(final @Nullable String topLevelExpressionLanguage) {
+    public TopLevelExpressionLanguage(final String topLevelExpressionLanguage) {
         this.topLevelExpressionLanguage = topLevelExpressionLanguage;
     }
 

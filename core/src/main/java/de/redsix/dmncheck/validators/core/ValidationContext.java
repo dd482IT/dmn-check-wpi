@@ -21,7 +21,7 @@ public class ValidationContext {
 
         private final Map<Class<T>, U> cache = new ConcurrentHashMap<>();
 
-        private Function<Class<T>, U> doMemoize(final Function<Class<T>, @NonNull U> function) {
+        private Function<Class<T>, U> doMemoize(final Function<Class<T>, U> function) {
             return input -> cache.computeIfAbsent(input, function);
         }
 

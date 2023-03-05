@@ -6,5 +6,5 @@ public enum ProjectClassLoader {
 
     INSTANCE;
 
-    public @Nullable ClassLoader classLoader;
+    public ClassLoader classLoader;
 }

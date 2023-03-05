@@ -92,7 +92,7 @@ public class ValidationServer {
         }
     }
 
-    private static String nullsafeError(@Nullable String message) {
+    private static String nullsafeError(String message) {
         return Optional.ofNullable(message).orElse("Unknown Error");
     }
 }

@@ -20,7 +20,7 @@ public class ValidatorLoader {
     private static final String VALIDATOR_CORE_PACKAGE = "de.redsix.dmncheck.validators.core";
 
     private static int inputParameterHash;
-    private static @MonotonicNonNull List<Validator> validators;
+    private static List<Validator> validators;
 
     private ValidatorLoader() {
 
@@ -30,7 +30,7 @@ public class ValidatorLoader {
         return getValidators(null, null);
     }
 
-    public static List<Validator> getValidators(final String @Nullable [] packages, final String @Nullable [] classes) {
+    public static List<Validator> getValidators(final String[] packages, final String[] classes) {
         if (inputParameterHash == Objects.hash(Arrays.hashCode(packages), Arrays.hashCode(classes)) && validators != null) {
             return validators;
         }
