@@ -1,0 +1,32 @@
+package de.redsix.dmncheck.validators;
+
+import de.redsix.dmncheck.result.Severity;
+import de.redsix.dmncheck.result.ValidationResult;
+import de.redsix.dmncheck.validators.core.SimpleValidator;
+import de.redsix.dmncheck.validators.core.ValidationContext;
+import org.camunda.bpm.model.dmn.instance.Decision;
+import org.camunda.bpm.model.dmn.instance.Definitions;
+import java.util.Collections;
+import java.util.List;
+
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.nullness.NullnessChecker")
+public class NoDecisionPresentValidator extends SimpleValidator<Definitions> {
+
+    @org.checkerframework.dataflow.qual.Pure
+    public  @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull boolean isApplicable(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull NoDecisionPresentValidator this, @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Definitions definitions, @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ValidationContext validationContext) {
+        return true;
+    }
+
+    public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull List<ValidationResult> validate(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull NoDecisionPresentValidator this, @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Definitions definitions, @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ValidationContext validationContext) {
+        if (definitions.getChildElementsByType(Decision.class).isEmpty()) {
+            return Collections.singletonList(ValidationResult.init.message("No decisions found").severity(Severity.WARNING).element(definitions).build());
+        } else {
+            return Collections.emptyList();
+        }
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Class<Definitions> getClassUnderValidation(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull NoDecisionPresentValidator this) {
+        return Definitions.class;
+    }
+}

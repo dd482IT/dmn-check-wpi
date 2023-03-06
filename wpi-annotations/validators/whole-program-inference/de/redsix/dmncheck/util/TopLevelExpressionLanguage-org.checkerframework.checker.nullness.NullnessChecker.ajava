@@ -1,0 +1,26 @@
+package de.redsix.dmncheck.util;
+
+import org.camunda.bpm.model.dmn.instance.LiteralExpression;
+import org.camunda.bpm.model.dmn.instance.UnaryTests;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.nullness.NullnessChecker")
+public class TopLevelExpressionLanguage {
+
+    public final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.MonotonicNonNull String topLevelExpressionLanguage;
+
+    @org.checkerframework.framework.qual.EnsuresQualifier(expression = { "this.topLevelExpressionLanguage" }, qualifier = org.checkerframework.checker.nullness.qual.Nullable.class)
+    public TopLevelExpressionLanguage(final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.Nullable String topLevelExpressionLanguage) {
+        this.topLevelExpressionLanguage = topLevelExpressionLanguage;
+    }
+
+    @org.checkerframework.framework.qual.EnsuresQualifier(expression = { "this.topLevelExpressionLanguage" }, qualifier = org.checkerframework.checker.nullness.qual.Nullable.class)
+    public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Expression toExpression(final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull UnaryTests unaryTests) {
+        return new Expression(unaryTests, topLevelExpressionLanguage);
+    }
+
+    @org.checkerframework.framework.qual.EnsuresQualifier(expression = { "this.topLevelExpressionLanguage" }, qualifier = org.checkerframework.checker.nullness.qual.Nullable.class)
+    public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Expression toExpression(final LiteralExpression literalExpression) {
+        return new Expression(literalExpression, topLevelExpressionLanguage);
+    }
+}

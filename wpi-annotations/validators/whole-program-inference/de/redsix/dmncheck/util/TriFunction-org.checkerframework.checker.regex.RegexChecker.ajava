@@ -1,0 +1,8 @@
+package de.redsix.dmncheck.util;
+
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.regex.RegexChecker")
+public interface TriFunction<A, B, C, R> {
+
+    @org.checkerframework.dataflow.qual.Pure
+    R apply( TriFunction<A, B, C, R> this, A a, B b, C c);
+}

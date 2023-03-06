@@ -1,0 +1,17 @@
+package de.redsix.dmncheck.validators;
+
+import org.camunda.bpm.model.dmn.instance.Decision;
+
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.nullness.NullnessChecker")
+public class DecisionIdAndNameValidator extends IdAndNameValidator<Decision> {
+
+    @org.checkerframework.dataflow.qual.Pure
+    public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull String getName(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull DecisionIdAndNameValidator this) {
+        return "decision";
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Class<Decision> getClassUnderValidation(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull DecisionIdAndNameValidator this) {
+        return Decision.class;
+    }
+}

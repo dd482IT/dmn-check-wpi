@@ -1,0 +1,33 @@
+package de.redsix.dmncheck.validators;
+
+import de.redsix.dmncheck.result.ValidationResult;
+import de.redsix.dmncheck.validators.core.SimpleValidator;
+import de.redsix.dmncheck.validators.core.ValidationContext;
+import org.camunda.bpm.model.dmn.BuiltinAggregator;
+import org.camunda.bpm.model.dmn.HitPolicy;
+import org.camunda.bpm.model.dmn.instance.DecisionTable;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.nullness.KeyForSubchecker")
+public class AggregationValidator extends SimpleValidator<DecisionTable> {
+
+    public   boolean isApplicable( AggregationValidator this,  DecisionTable decisionTable,  ValidationContext validationContext) {
+        return !HitPolicy.COLLECT.equals(decisionTable.getHitPolicy());
+    }
+
+    public  List<ValidationResult> validate( AggregationValidator this,  DecisionTable decisionTable,  ValidationContext validationContext) {
+        final BuiltinAggregator builtinAggregator = decisionTable.getAggregation();
+        if (Objects.nonNull(builtinAggregator)) {
+            return Collections.singletonList(ValidationResult.init.message("Aggregations are only valid with HitPolicy " + HitPolicy.COLLECT).element(decisionTable).build());
+        } else {
+            return Collections.emptyList();
+        }
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public  Class<DecisionTable> getClassUnderValidation( AggregationValidator this) {
+        return DecisionTable.class;
+    }
+}

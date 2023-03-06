@@ -1,0 +1,39 @@
+package de.redsix.dmncheck.feel;
+
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.formatter.FormatterChecker")
+public enum Operator {
+
+    ADD("+"),
+    SUB("-"),
+    MUL("*"),
+    DIV("/"),
+    EXP("**"),
+    LT("<"),
+    GT(">"),
+    LE("<="),
+    GE(">="),
+    NOT("NOT"),
+    OR("or"),
+    AND("and");
+
+    private final @org.checkerframework.checker.formatter.qual.Format({}) String name;
+
+    Operator(final @org.checkerframework.checker.formatter.qual.Format({}) String name) {
+        this.name = name;
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public @org.checkerframework.checker.formatter.qual.Format({}) String toString( Operator this) {
+        return name;
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public   boolean isLessThan( Operator this) {
+        return this.equals(LT) || this.equals(LE);
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public   boolean isGreaterThan( Operator this) {
+        return this.equals(GT) || this.equals(GE);
+    }
+}

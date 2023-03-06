@@ -1,0 +1,16 @@
+package de.redsix.dmncheck.validators;
+
+import org.camunda.bpm.model.dmn.instance.Output;
+
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.nullness.KeyForSubchecker")
+public class OutputTypeDeclarationValidator extends ElementTypeDeclarationValidator<Output> {
+
+    public  String getTypeRef( OutputTypeDeclarationValidator this,  Output output) {
+        return output.getTypeRef();
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public  Class<Output> getClassUnderValidation( OutputTypeDeclarationValidator this) {
+        return Output.class;
+    }
+}

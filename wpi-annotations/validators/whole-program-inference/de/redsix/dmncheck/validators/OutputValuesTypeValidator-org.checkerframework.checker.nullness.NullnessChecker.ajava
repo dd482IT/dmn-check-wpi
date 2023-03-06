@@ -1,0 +1,34 @@
+package de.redsix.dmncheck.validators;
+
+import de.redsix.dmncheck.feel.ExpressionTypeParser;
+import de.redsix.dmncheck.result.ValidationResult;
+import de.redsix.dmncheck.validators.core.ValidationContext;
+import org.camunda.bpm.model.dmn.instance.Output;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.nullness.NullnessChecker")
+public class OutputValuesTypeValidator extends TypeValidator<Output> {
+
+    public  @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull boolean isApplicable(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull OutputValuesTypeValidator this, final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Output output, @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ValidationContext validationContext) {
+        final String expressionType = output.getTypeRef();
+        return output.getOutputValues() != null && ExpressionTypeParser.parse(expressionType, validationContext.getItemDefinitions()).match(parseError -> false, parseResult -> true);
+    }
+
+    public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull List<ValidationResult> validate(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull OutputValuesTypeValidator this, final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Output output, @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ValidationContext validationContext) {
+        final String expressionType = output.getTypeRef();
+        return ExpressionTypeParser.parse(expressionType, validationContext.getItemDefinitions()).match(validationResult -> Collections.singletonList(validationResult.element(output).build()), inputType -> typecheck(output, Stream.of(output.getOutputValues()).map(toplevelExpressionLanguage::toExpression), Stream.of(inputType)).collect(Collectors.toList()));
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    protected @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Class<Output> getClassUnderValidation(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull OutputValuesTypeValidator this) {
+        return Output.class;
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull String errorMessage(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull OutputValuesTypeValidator this) {
+        return "Type of predefined output values does not match type of output expression";
+    }
+}

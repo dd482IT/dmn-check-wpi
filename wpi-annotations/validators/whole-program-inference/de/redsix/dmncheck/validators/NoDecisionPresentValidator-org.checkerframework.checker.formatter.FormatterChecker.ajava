@@ -1,0 +1,32 @@
+package de.redsix.dmncheck.validators;
+
+import de.redsix.dmncheck.result.Severity;
+import de.redsix.dmncheck.result.ValidationResult;
+import de.redsix.dmncheck.validators.core.SimpleValidator;
+import de.redsix.dmncheck.validators.core.ValidationContext;
+import org.camunda.bpm.model.dmn.instance.Decision;
+import org.camunda.bpm.model.dmn.instance.Definitions;
+import java.util.Collections;
+import java.util.List;
+
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.formatter.FormatterChecker")
+public class NoDecisionPresentValidator extends SimpleValidator<Definitions> {
+
+    @org.checkerframework.dataflow.qual.Pure
+    public   boolean isApplicable( NoDecisionPresentValidator this,  Definitions definitions,  ValidationContext validationContext) {
+        return true;
+    }
+
+    public  List<ValidationResult> validate( NoDecisionPresentValidator this,  Definitions definitions,  ValidationContext validationContext) {
+        if (definitions.getChildElementsByType(Decision.class).isEmpty()) {
+            return Collections.singletonList(ValidationResult.init.message("No decisions found").severity(Severity.WARNING).element(definitions).build());
+        } else {
+            return Collections.emptyList();
+        }
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public  Class<Definitions> getClassUnderValidation( NoDecisionPresentValidator this) {
+        return Definitions.class;
+    }
+}

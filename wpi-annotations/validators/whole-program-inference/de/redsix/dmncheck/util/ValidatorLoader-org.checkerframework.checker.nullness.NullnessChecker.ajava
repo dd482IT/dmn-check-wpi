@@ -1,0 +1,56 @@
+package de.redsix.dmncheck.util;
+
+import de.redsix.dmncheck.validators.core.Validator;
+import io.github.classgraph.ClassGraph;
+import io.github.classgraph.ClassInfoList;
+import io.github.classgraph.ScanResult;
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.nullness.NullnessChecker")
+public class ValidatorLoader {
+
+    private static final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull String VALIDATOR_PACKAGE = "de.redsix.dmncheck.validators";
+
+    private static final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull String VALIDATOR_CORE_PACKAGE = "de.redsix.dmncheck.validators.core";
+
+    private static  @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull int inputParameterHash;
+
+    private static @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.MonotonicNonNull List<Validator> validators;
+
+    @org.checkerframework.dataflow.qual.SideEffectFree
+    private ValidatorLoader() {
+    }
+
+    @org.checkerframework.checker.nullness.qual.EnsuresNonNull({ "de.redsix.dmncheck.util.ValidatorLoader.validators" })
+    public static @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull List<Validator> getValidators() {
+        return getValidators(null, null);
+    }
+
+    @org.checkerframework.framework.qual.RequiresQualifier(expression = { "de.redsix.dmncheck.util.ValidatorLoader.validators" }, qualifier = org.checkerframework.checker.nullness.qual.Nullable.class)
+    @org.checkerframework.checker.nullness.qual.EnsuresNonNull({ "de.redsix.dmncheck.util.ValidatorLoader.validators" })
+    public static @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull List<Validator> getValidators(final String @org.checkerframework.checker.initialization.qual.FBCBottom @org.checkerframework.checker.nullness.qual.Nullable [] packages, final String @org.checkerframework.checker.initialization.qual.FBCBottom @org.checkerframework.checker.nullness.qual.Nullable [] classes) {
+        if (inputParameterHash == Objects.hash(Arrays.hashCode(packages), Arrays.hashCode(classes)) && validators != null) {
+            return validators;
+        }
+        inputParameterHash = Objects.hash(Arrays.hashCode(packages), Arrays.hashCode(classes));
+        final ScanResult scanResult = new ClassGraph().acceptClasses(Validator.class.getName()).acceptPackages(VALIDATOR_CORE_PACKAGE).acceptPackagesNonRecursive(packages == null ? new String[] { VALIDATOR_PACKAGE, VALIDATOR_CORE_PACKAGE } : packages).acceptClasses(classes == null ? new String[] {} : classes).scan();
+        final ClassInfoList allValidatorClasses = scanResult.getClassesImplementing(Validator.class.getName());
+        validators = allValidatorClasses.loadClasses(Validator.class).stream().filter(validatorClass -> !Modifier.isAbstract(validatorClass.getModifiers())).filter(validatorClass -> !Modifier.isInterface(validatorClass.getModifiers())).map(ValidatorLoader::instantiateValidator).collect(Collectors.toList());
+        return validators;
+    }
+
+    private static @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Validator instantiateValidator(final Class<? extends Validator> validator) {
+        try {
+            return validator.getDeclaredConstructor().newInstance();
+        } catch (IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
+            throw new RuntimeException("Failed to load validator " + validator, e);
+        }
+    }
+}

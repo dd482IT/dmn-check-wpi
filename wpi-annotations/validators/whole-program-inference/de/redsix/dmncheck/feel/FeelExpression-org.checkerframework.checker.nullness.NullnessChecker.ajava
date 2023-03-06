@@ -1,0 +1,80 @@
+package de.redsix.dmncheck.feel;
+
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.derive4j.Data;
+import org.derive4j.Derive;
+import org.derive4j.Make;
+import org.derive4j.Visibility;
+import java.time.LocalDateTime;
+import java.util.Optional;
+
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.nullness.NullnessChecker")
+public abstract class FeelExpression {
+
+    public interface Cases<R> {
+
+        @org.checkerframework.dataflow.qual.Pure
+        R Empty();
+
+        @org.checkerframework.dataflow.qual.Pure
+        R Null();
+
+        @org.checkerframework.dataflow.qual.Pure
+        R BooleanLiteral(Boolean aBoolean);
+
+        @org.checkerframework.dataflow.qual.Pure
+        R DateLiteral(LocalDateTime dateTime);
+
+        @org.checkerframework.dataflow.qual.Pure
+        R DoubleLiteral(Double aDouble);
+
+        @org.checkerframework.dataflow.qual.Pure
+        R IntegerLiteral(Integer aInteger);
+
+        @org.checkerframework.dataflow.qual.Pure
+        R StringLiteral(String string);
+
+        @org.checkerframework.dataflow.qual.Pure
+        R VariableLiteral(String name);
+
+        @org.checkerframework.dataflow.qual.Pure
+        R RangeExpression(boolean isLeftInclusive, FeelExpression lowerBound, FeelExpression upperBound, boolean isRightInclusive);
+
+        @org.checkerframework.dataflow.qual.Pure
+        R UnaryExpression(Operator operator, FeelExpression expression);
+
+        @org.checkerframework.dataflow.qual.Pure
+        R BinaryExpression(FeelExpression left, Operator operator, FeelExpression right);
+
+        @org.checkerframework.dataflow.qual.Pure
+        R DisjunctionExpression(FeelExpression head, FeelExpression tail);
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public abstract <R> R match(Cases<R> cases);
+
+    public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Optional<Boolean> subsumes(final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull FeelExpression expression) {
+        return Subsumption.subsumes(this, expression, Subsumption.eq);
+    }
+
+    public  @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull boolean containsVariable(final String name) {
+        return FeelExpressions.caseOf(this).Empty_(false).Null_(false).BooleanLiteral_(false).DateLiteral_(false).DoubleLiteral_(false).IntegerLiteral_(false).StringLiteral_(false).VariableLiteral(variableName -> variableName.equals(name)).RangeExpression((__, lowerBound, upperBound, ___) -> lowerBound.containsVariable(name) || upperBound.containsVariable(name)).UnaryExpression((__, expression) -> expression.containsVariable(name)).BinaryExpression((left, __, right) -> left.containsVariable(name) || right.containsVariable(name)).DisjunctionExpression((head, tail) -> head.containsVariable(name) || tail.containsVariable(name));
+    }
+
+    public  @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull boolean isLiteral() {
+        return FeelExpressions.caseOf(this).BooleanLiteral_(true).DateLiteral_(true).DoubleLiteral_(true).IntegerLiteral_(true).StringLiteral_(true).VariableLiteral_(true).otherwise_(false);
+    }
+
+    public  @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull boolean containsNot() {
+        return FeelExpressions.caseOf(this).Empty_(false).Null_(false).BooleanLiteral_(false).DateLiteral_(false).DoubleLiteral_(false).IntegerLiteral_(false).StringLiteral_(false).VariableLiteral_(false).RangeExpression((__, lowerBound, upperBound, ___) -> lowerBound.containsNot() || upperBound.containsNot()).UnaryExpression((operator, expression) -> operator.equals(Operator.NOT)).BinaryExpression((left, __, right) -> left.containsNot() || right.containsNot()).DisjunctionExpression((head, tail) -> head.containsNot() || tail.containsNot());
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public abstract int hashCode();
+
+    @org.checkerframework.dataflow.qual.Pure
+    public abstract boolean equals(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Object obj);
+
+    @org.checkerframework.dataflow.qual.Pure
+    public abstract String toString();
+}

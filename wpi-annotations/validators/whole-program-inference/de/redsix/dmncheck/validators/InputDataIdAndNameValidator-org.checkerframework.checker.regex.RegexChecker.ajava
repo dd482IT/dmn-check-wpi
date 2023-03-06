@@ -1,0 +1,17 @@
+package de.redsix.dmncheck.validators;
+
+import org.camunda.bpm.model.dmn.instance.InputData;
+
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.regex.RegexChecker")
+public class InputDataIdAndNameValidator extends IdAndNameValidator<InputData> {
+
+    @org.checkerframework.dataflow.qual.Pure
+    public @org.checkerframework.checker.regex.qual.Regex String getName( InputDataIdAndNameValidator this) {
+        return "input";
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public  Class<InputData> getClassUnderValidation( InputDataIdAndNameValidator this) {
+        return InputData.class;
+    }
+}

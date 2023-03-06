@@ -1,0 +1,38 @@
+package de.redsix.dmncheck.validators;
+
+import de.redsix.dmncheck.result.ValidationResult;
+import de.redsix.dmncheck.result.Severity;
+import de.redsix.dmncheck.validators.core.SimpleValidator;
+import de.redsix.dmncheck.validators.core.ValidationContext;
+import org.camunda.bpm.model.dmn.instance.DecisionTable;
+import org.camunda.bpm.model.dmn.instance.Input;
+import org.camunda.bpm.model.dmn.instance.Output;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.nullness.NullnessChecker")
+public class DuplicateColumnLabelValidator extends SimpleValidator<DecisionTable> {
+
+    @org.checkerframework.dataflow.qual.Pure
+    public  @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull boolean isApplicable(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull DuplicateColumnLabelValidator this, @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull DecisionTable decisionTable, @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ValidationContext validationContext) {
+        return true;
+    }
+
+    public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull List<ValidationResult> validate(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull DuplicateColumnLabelValidator this, @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull DecisionTable decisionTable, @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ValidationContext validationContext) {
+        return Stream.concat(validateColumn(decisionTable, decisionTable.getInputs(), Input::getLabel).stream(), validateColumn(decisionTable, decisionTable.getOutputs(), Output::getLabel).stream()).collect(Collectors.toList());
+    }
+
+    private <T> @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull List<ValidationResult> validateColumn(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull DecisionTable decisionTable, @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Collection<T> columns, @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Function<T, String> getLabel) {
+        final List<String> labels = columns.stream().map(getLabel).collect(Collectors.toList());
+        return labels.stream().filter(label -> Collections.frequency(labels, label) > 1).distinct().map(label -> ValidationResult.init.message("Column with label '" + label + "' is used more than once").severity(Severity.WARNING).element(decisionTable).build()).collect(Collectors.toList());
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Class<DecisionTable> getClassUnderValidation(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull DuplicateColumnLabelValidator this) {
+        return DecisionTable.class;
+    }
+}

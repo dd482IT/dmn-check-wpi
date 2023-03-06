@@ -1,0 +1,14 @@
+package de.redsix.dmncheck.server;
+
+import org.camunda.bpm.model.dmn.impl.DmnParser;
+import org.camunda.bpm.model.xml.instance.DomDocument;
+
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.regex.RegexChecker")
+public class NonValidatingDmnParser extends DmnParser {
+
+    @org.checkerframework.dataflow.qual.Pure
+    public void validateModel( NonValidatingDmnParser this,  DomDocument document) {
+        // Do not validate against the xml schema for now. Errors from the xml validation are hard to map back
+        // into the editor.
+    }
+}

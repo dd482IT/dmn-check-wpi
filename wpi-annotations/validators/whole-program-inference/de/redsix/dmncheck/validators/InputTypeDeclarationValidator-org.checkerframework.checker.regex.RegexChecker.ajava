@@ -1,0 +1,16 @@
+package de.redsix.dmncheck.validators;
+
+import org.camunda.bpm.model.dmn.instance.InputExpression;
+
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.regex.RegexChecker")
+public class InputTypeDeclarationValidator extends ElementTypeDeclarationValidator<InputExpression> {
+
+    public  String getTypeRef( InputTypeDeclarationValidator this,  InputExpression inputExpression) {
+        return inputExpression.getTypeRef();
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public  Class<InputExpression> getClassUnderValidation( InputTypeDeclarationValidator this) {
+        return InputExpression.class;
+    }
+}

@@ -1,0 +1,33 @@
+package de.redsix.dmncheck.validators;
+
+import de.redsix.dmncheck.result.ValidationResult;
+import de.redsix.dmncheck.validators.core.SimpleValidator;
+import de.redsix.dmncheck.validators.core.ValidationContext;
+import org.camunda.bpm.model.dmn.BuiltinAggregator;
+import org.camunda.bpm.model.dmn.HitPolicy;
+import org.camunda.bpm.model.dmn.instance.DecisionTable;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.nullness.NullnessChecker")
+public class AggregationValidator extends SimpleValidator<DecisionTable> {
+
+    public  @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull boolean isApplicable(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull AggregationValidator this, @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull DecisionTable decisionTable, @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ValidationContext validationContext) {
+        return !HitPolicy.COLLECT.equals(decisionTable.getHitPolicy());
+    }
+
+    public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull List<ValidationResult> validate(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull AggregationValidator this, @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull DecisionTable decisionTable, @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ValidationContext validationContext) {
+        final BuiltinAggregator builtinAggregator = decisionTable.getAggregation();
+        if (Objects.nonNull(builtinAggregator)) {
+            return Collections.singletonList(ValidationResult.init.message("Aggregations are only valid with HitPolicy " + HitPolicy.COLLECT).element(decisionTable).build());
+        } else {
+            return Collections.emptyList();
+        }
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Class<DecisionTable> getClassUnderValidation(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull AggregationValidator this) {
+        return DecisionTable.class;
+    }
+}

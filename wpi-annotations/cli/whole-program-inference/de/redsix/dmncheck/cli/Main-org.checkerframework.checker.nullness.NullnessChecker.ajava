@@ -1,0 +1,80 @@
+package de.redsix.dmncheck.cli;
+
+import de.redsix.dmncheck.plugin.PluginBase;
+import de.redsix.dmncheck.plugin.PrettyPrintValidationResults;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import picocli.CommandLine;
+import picocli.CommandLine.Command;
+import picocli.CommandLine.Option;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.Callable;
+
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.nullness.NullnessChecker")
+public class Main implements PluginBase, Callable<Integer> {
+
+    private static final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Logger logger = LoggerFactory.getLogger(Main.class);
+
+    private List<String> excludeList;
+
+    private List<String> searchPath;
+
+    private String[] validatorPackages;
+
+    private String[] validatorClasses;
+
+    private boolean failOnWarning;
+
+    private String projectClasspath;
+
+    public static void main(String[] args) {
+        int exitCode = new CommandLine(new Main()).execute(args);
+        System.exit(exitCode);
+    }
+
+    public PrettyPrintValidationResults.@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull PluginLogger getPluginLogger(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Main this) {
+        return new PrettyPrintValidationResults.PluginLogger((t) -> logger.info(t.toString()), (t) -> logger.warn(t.toString()), (t) -> logger.error(t.toString()));
+    }
+
+    @org.checkerframework.dataflow.qual.SideEffectFree
+    public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull List<String> getExcludeList(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Main this) {
+        if (Objects.isNull(excludeList)) {
+            return Collections.emptyList();
+        } else {
+            return excludeList;
+        }
+    }
+
+    public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull List<String> getSearchPathList(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Main this) {
+        if (Objects.isNull(searchPath) || searchPath.isEmpty()) {
+            return Collections.singletonList("");
+        } else {
+            return searchPath;
+        }
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull String @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull [] getValidatorPackages(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Main this) {
+        return validatorPackages;
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull String @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull [] getValidatorClasses(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Main this) {
+        return validatorClasses;
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public  @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull boolean failOnWarning(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Main this) {
+        return failOnWarning;
+    }
+
+    public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Integer call(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Main this) {
+        if (Objects.nonNull(projectClasspath)) {
+            loadProjectClasspath(Arrays.asList(projectClasspath.split(":")));
+        }
+        return validate() ? 1 : 0;
+    }
+}

@@ -1,0 +1,107 @@
+package de.redsix.dmncheck.validators;
+
+import de.redsix.dmncheck.feel.ExpressionType;
+import de.redsix.dmncheck.feel.ExpressionTypes;
+import de.redsix.dmncheck.feel.FeelParser;
+import de.redsix.dmncheck.feel.FeelTypecheck;
+import de.redsix.dmncheck.result.Severity;
+import de.redsix.dmncheck.result.ValidationResult;
+import de.redsix.dmncheck.util.*;
+import de.redsix.dmncheck.validators.core.SimpleValidator;
+import org.camunda.bpm.model.dmn.DmnModelInstance;
+import org.camunda.bpm.model.dmn.instance.DmnElement;
+import org.camunda.bpm.model.xml.instance.ModelElementInstance;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import static de.redsix.dmncheck.util.Eithers.left;
+import static de.redsix.dmncheck.util.Eithers.right;
+
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.nullness.NullnessChecker")
+public abstract class TypeValidator<T extends ModelElementInstance> extends SimpleValidator<T> {
+
+    @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull TopLevelExpressionLanguage toplevelExpressionLanguage = new TopLevelExpressionLanguage(null);
+
+    @org.checkerframework.dataflow.qual.Pure
+    abstract @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull String errorMessage();
+
+    public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull List<ValidationResult> apply(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull TypeValidator<T> this, final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull DmnModelInstance dmnModelInstance) {
+        toplevelExpressionLanguage = new TopLevelExpressionLanguage(dmnModelInstance.getDefinitions().getExpressionLanguage());
+        return super.apply(dmnModelInstance);
+    }
+
+    @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Stream<ValidationResult> typecheck(final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull DmnElement dmnElement, final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Stream<Expression> expressions, final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Stream<String> variables, final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Stream<ExpressionType> types) {
+        final Stream<Optional<ValidationResult.Builder.ElementStep>> intermediateResults = Util.zip(expressions, variables, types, (expression, variable, type) -> {
+            final FeelTypecheck.Context context = new FeelTypecheck.Context();
+            context.put(variable, type);
+            return typecheckExpression(expression, context, type);
+        });
+        return buildValidationResults(intermediateResults, dmnElement);
+    }
+
+    @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Stream<ValidationResult> typecheck(final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull DmnElement dmnElement, final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Stream<Expression> expressionStream, final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Stream<ExpressionType> types) {
+        final Stream<Optional<ValidationResult.Builder.ElementStep>> intermediateResults = Util.zip(expressionStream, types, (unaryTest, type) -> {
+            final FeelTypecheck.Context emptyContext = new FeelTypecheck.Context();
+            return typecheckExpression(unaryTest, emptyContext, type);
+        });
+        return buildValidationResults(intermediateResults, dmnElement);
+    }
+
+    private @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Optional<ValidationResult.Builder.ElementStep> typecheckExpression(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Expression expression, FeelTypecheck.@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Context context, @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ExpressionType expectedType) {
+        return FeelParser.parse(expression).bind(feelExpression -> FeelTypecheck.typecheck(context, feelExpression)).map(type -> {
+            if (type.isSubtypeOf(ExpressionTypes.STRING()) && ExpressionTypes.getClassName(expectedType).isPresent()) {
+                return checkEnumValue(ExpressionTypes.getClassName(expectedType).get(), expression.textContent);
+            } else if (type.isSubtypeOf(expectedType) || ExpressionTypes.TOP().equals(type)) {
+                return Optional.<ValidationResult.Builder.ElementStep>empty();
+            } else {
+                return Optional.of(ValidationResult.init.message(errorMessage()).severity(Severity.ERROR));
+            }
+        }).match(Optional::of, Function.identity());
+    }
+
+    private @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Optional<ValidationResult.Builder.ElementStep> checkEnumValue(final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull String className, final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull String stringValue) {
+        return loadEnum(className).bind(this::isEnum).bind(clazz -> doesStringBelongToEnum(className, stringValue, clazz)).match(Optional::of, (__) -> Optional.empty());
+    }
+
+    private @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Either<ValidationResult.Builder.ElementStep, Class<?>> doesStringBelongToEnum(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull String className, @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull String stringValue, @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Class<? extends Enum<?>> clazz) {
+        final Enum<?>[] enumConstants = clazz.getEnumConstants();
+        final List<String> enumConstantNames = Arrays.stream(enumConstants == null ? new Enum<?>[] {} : enumConstants).map(Enum::name).collect(Collectors.toList());
+        final String value = stringValue.substring(1, stringValue.length() - 1);
+        if (enumConstantNames.contains(value)) {
+            return right(clazz);
+        } else {
+            return left(ValidationResult.init.message("Value " + stringValue + " does not belong to " + className));
+        }
+    }
+
+    private @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Either<ValidationResult.Builder.ElementStep, Class<?>> loadEnum(final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull String className) {
+        try {
+            if (ProjectClassLoader.INSTANCE.classLoader != null) {
+                return right(ProjectClassLoader.INSTANCE.classLoader.loadClass(className));
+            } else {
+                return left(ValidationResult.init.message("Classloader of project under validation not found"));
+            }
+        } catch (ClassNotFoundException e) {
+            return left(ValidationResult.init.message("Class " + className + " not found on project classpath."));
+        }
+    }
+
+    private @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Either<ValidationResult.Builder.ElementStep, Class<? extends Enum<?>>> isEnum(Class<?> clazz) {
+        if (clazz.isEnum()) {
+            // checkerframework cannot figure out the types when using as clazz.asSubclass(Enum.class) because asSubclass introduces
+            // a fresh type variable. Therefore we cast the value to the correct type.
+            // equality constraints: Class<? extends Enum<?>>
+            // lower bounds: Class<CAP#1>
+            return right((Class<? extends Enum<?>>) clazz);
+        } else {
+            return left(ValidationResult.init.message("Class " + clazz.getCanonicalName() + " is no enum."));
+        }
+    }
+
+    private @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Stream<ValidationResult> buildValidationResults(final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Stream<Optional<ValidationResult.Builder.ElementStep>> elementSteps, final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull DmnElement dmnElement) {
+        return elementSteps.filter(Optional::isPresent).map(Optional::get).map(validationResultBuilder -> validationResultBuilder.element(dmnElement)).map(ValidationResult.Builder.BuildStep::build);
+    }
+}

@@ -1,0 +1,23 @@
+package de.redsix.dmncheck.util;
+
+import org.camunda.bpm.model.dmn.instance.LiteralExpression;
+import org.camunda.bpm.model.dmn.instance.UnaryTests;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.nullness.KeyForSubchecker")
+public class TopLevelExpressionLanguage {
+
+    public final  String topLevelExpressionLanguage;
+
+    public TopLevelExpressionLanguage(final  String topLevelExpressionLanguage) {
+        this.topLevelExpressionLanguage = topLevelExpressionLanguage;
+    }
+
+    public  Expression toExpression( TopLevelExpressionLanguage this, final  UnaryTests unaryTests) {
+        return new Expression(unaryTests, topLevelExpressionLanguage);
+    }
+
+    public  Expression toExpression(final LiteralExpression literalExpression) {
+        return new Expression(literalExpression, topLevelExpressionLanguage);
+    }
+}

@@ -1,0 +1,39 @@
+package de.redsix.dmncheck.feel;
+
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.nullness.NullnessChecker")
+public enum Operator {
+
+    ADD("+"),
+    SUB("-"),
+    MUL("*"),
+    DIV("/"),
+    EXP("**"),
+    LT("<"),
+    GT(">"),
+    LE("<="),
+    GE(">="),
+    NOT("NOT"),
+    OR("or"),
+    AND("and");
+
+    private final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull String name;
+
+    Operator(final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull String name) {
+        this.name = name;
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull String toString(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Operator this) {
+        return name;
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public  @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull boolean isLessThan() {
+        return this.equals(LT) || this.equals(LE);
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public  @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull boolean isGreaterThan() {
+        return this.equals(GT) || this.equals(GE);
+    }
+}

@@ -1,0 +1,88 @@
+package de.redsix.dmncheck;
+
+import de.redsix.dmncheck.plugin.PluginBase;
+import de.redsix.dmncheck.plugin.PrettyPrintValidationResults;
+import org.apache.maven.artifact.Artifact;
+import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.plugins.annotations.ResolutionScope;
+import org.apache.maven.project.MavenProject;
+import java.io.File;
+import java.util.*;
+import java.util.stream.Collectors;
+
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.nullness.KeyForSubchecker")
+public class CheckerMain extends AbstractMojo implements PluginBase {
+
+    String[] excludes;
+
+    String[] searchPaths;
+
+    String[] validatorPackages;
+
+    String[] validatorClasses;
+
+    MavenProject project;
+
+    Boolean failOnWarning;
+
+    String[] classpath;
+
+    public void execute( CheckerMain this) throws MojoExecutionException {
+        loadClasspath();
+        if (validate()) {
+            throw new MojoExecutionException("Some files are not valid, see previous logs.");
+        }
+    }
+
+    public PrettyPrintValidationResults. PluginLogger getPluginLogger( CheckerMain this) {
+        return new PrettyPrintValidationResults.PluginLogger(getLog()::info, getLog()::warn, getLog()::error);
+    }
+
+    @org.checkerframework.dataflow.qual.SideEffectFree
+    public  List<String> getExcludeList( CheckerMain this) {
+        if (excludes != null) {
+            return Arrays.asList(excludes);
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+    public  List<String> getSearchPathList( CheckerMain this) {
+        if (searchPaths != null) {
+            return Arrays.asList(searchPaths);
+        } else {
+            return Collections.singletonList("");
+        }
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public  String  [] getValidatorPackages( CheckerMain this) {
+        return validatorPackages;
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public  String  [] getValidatorClasses( CheckerMain this) {
+        return validatorClasses;
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public   boolean failOnWarning( CheckerMain this) {
+        return this.failOnWarning;
+    }
+
+    void loadClasspath( CheckerMain this) throws MojoExecutionException {
+        if (classpath != null && classpath.length != 0) {
+            loadProjectClasspath(Arrays.asList(classpath));
+        } else {
+            loadProjectClasspath();
+        }
+    }
+
+    void loadProjectClasspath( CheckerMain this) throws MojoExecutionException {
+        List<String> classpath = project.getArtifacts().stream().map(Artifact::getFile).map(File::getAbsolutePath).collect(Collectors.toList());
+        loadProjectClasspath(classpath);
+    }
+}

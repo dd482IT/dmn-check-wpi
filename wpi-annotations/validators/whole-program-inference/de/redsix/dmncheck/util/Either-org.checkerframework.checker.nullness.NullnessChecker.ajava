@@ -1,0 +1,46 @@
+package de.redsix.dmncheck.util;
+
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.derive4j.Data;
+import org.derive4j.Derive;
+import org.derive4j.Make;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.nullness.NullnessChecker")
+public abstract class Either<A, B> {
+
+    @org.checkerframework.dataflow.qual.Pure
+    public abstract <X> X match(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Function<A, X> left, @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Function<B, X> right);
+
+    @org.checkerframework.dataflow.qual.Pure
+    public <C> @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Either<A, C> bind(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Function<B, Either<A, C>> function) {
+        return this.match(Eithers::left, function);
+    }
+
+    public <C> @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Either<A, C> map(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Function<B, C> function) {
+        return this.match(Eithers::left, right -> Eithers.right(function.apply(right)));
+    }
+
+    public static <A, B> @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Collector<Either<A, B>, ?, Either<A, List<B>>> reduce() {
+        return Collectors.reducing(Eithers.right(new ArrayList<>()), either -> either.map(Arrays::asList), (either, eithers) -> either.bind(a -> eithers.bind(listOfA -> Eithers.right(appendAll(a, listOfA)))));
+    }
+
+    private static <A> @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull List<A> appendAll(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull List<A> list1, @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull List<A> list2) {
+        list1.addAll(list2);
+        return list1;
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public abstract int hashCode();
+
+    @org.checkerframework.dataflow.qual.Pure
+    public abstract boolean equals(Object obj);
+
+    @org.checkerframework.dataflow.qual.Pure
+    public abstract String toString();
+}

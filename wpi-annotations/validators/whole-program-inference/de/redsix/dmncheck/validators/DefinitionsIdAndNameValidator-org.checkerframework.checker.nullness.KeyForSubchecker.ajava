@@ -1,0 +1,17 @@
+package de.redsix.dmncheck.validators;
+
+import org.camunda.bpm.model.dmn.instance.Definitions;
+
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.nullness.KeyForSubchecker")
+public class DefinitionsIdAndNameValidator extends IdAndNameValidator<Definitions> {
+
+    @org.checkerframework.dataflow.qual.Pure
+    public  String getName( DefinitionsIdAndNameValidator this) {
+        return "definitions";
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public  Class<Definitions> getClassUnderValidation( DefinitionsIdAndNameValidator this) {
+        return Definitions.class;
+    }
+}

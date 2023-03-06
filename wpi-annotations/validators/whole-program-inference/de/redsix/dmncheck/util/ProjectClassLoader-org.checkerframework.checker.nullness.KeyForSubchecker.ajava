@@ -1,0 +1,11 @@
+package de.redsix.dmncheck.util;
+
+import org.checkerframework.checker.nullness.qual.Nullable;
+
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.nullness.KeyForSubchecker")
+public enum ProjectClassLoader {
+
+    INSTANCE;
+
+    public ClassLoader classLoader;
+}

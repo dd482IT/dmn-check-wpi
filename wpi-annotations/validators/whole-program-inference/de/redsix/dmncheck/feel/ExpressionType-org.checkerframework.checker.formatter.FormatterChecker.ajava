@@ -1,0 +1,81 @@
+package de.redsix.dmncheck.feel;
+
+import org.camunda.bpm.model.dmn.instance.ItemDefinition;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.derive4j.Data;
+import java.util.Arrays;
+import static de.redsix.dmncheck.feel.ExpressionTypes.DOUBLE;
+import static de.redsix.dmncheck.feel.ExpressionTypes.INTEGER;
+import static de.redsix.dmncheck.feel.ExpressionTypes.LONG;
+import static de.redsix.dmncheck.feel.ExpressionTypes.TOP;
+
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.formatter.FormatterChecker")
+public abstract class ExpressionType {
+
+    public interface Cases<R> {
+
+        @org.checkerframework.dataflow.qual.Pure
+        R TOP();
+
+        @org.checkerframework.dataflow.qual.Pure
+        R STRING();
+
+        @org.checkerframework.dataflow.qual.Pure
+        R BOOLEAN();
+
+        @org.checkerframework.dataflow.qual.Pure
+        R INTEGER();
+
+        @org.checkerframework.dataflow.qual.Pure
+        R LONG();
+
+        @org.checkerframework.dataflow.qual.Pure
+        R DOUBLE();
+
+        @org.checkerframework.dataflow.qual.Pure
+        R DATE();
+
+        @org.checkerframework.dataflow.qual.Pure
+        R ENUM(String className);
+
+        @org.checkerframework.dataflow.qual.Pure
+        R ITEMDEFINITION(ItemDefinition itemDefinition);
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public abstract <R> R match(ExpressionType.Cases<R> cases);
+
+    @org.checkerframework.dataflow.qual.Pure
+    public abstract int hashCode();
+
+    @org.checkerframework.dataflow.qual.Pure
+    public abstract boolean equals( ExpressionType this,  Object obj);
+
+    @org.checkerframework.dataflow.qual.Pure
+    public abstract String toString();
+
+    public static   boolean isNumeric(final  ExpressionType givenType) {
+        return !TOP().equals(givenType) && Arrays.asList(INTEGER(), LONG(), DOUBLE()).contains(givenType);
+    }
+
+    public   boolean isSubtypeOf( ExpressionType this, final  ExpressionType supertype) {
+        return reflexivity(this, supertype) || TOPisTopElement(supertype) || INTEGERsubtypeOfLONG(this, supertype) || INTEGERsubtypeOfDOUBLE(this, supertype);
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    private   boolean reflexivity( ExpressionType this, final  ExpressionType subtype, final  ExpressionType supertype) {
+        return subtype.equals(supertype);
+    }
+
+    private   boolean TOPisTopElement( ExpressionType this, final  ExpressionType supertype) {
+        return TOP().equals(supertype);
+    }
+
+    private   boolean INTEGERsubtypeOfLONG( ExpressionType this, final  ExpressionType subtype, final  ExpressionType supertype) {
+        return INTEGER().equals(subtype) && LONG().equals(supertype);
+    }
+
+    private   boolean INTEGERsubtypeOfDOUBLE( ExpressionType this, final  ExpressionType subtype, final  ExpressionType supertype) {
+        return INTEGER().equals(subtype) && DOUBLE().equals(supertype);
+    }
+}

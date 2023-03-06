@@ -1,0 +1,81 @@
+package de.redsix.dmncheck.feel;
+
+import org.camunda.bpm.model.dmn.instance.ItemDefinition;
+import org.checkerframework.checker.nullness.qual.Nullable;
+import org.derive4j.Data;
+import java.util.Arrays;
+import static de.redsix.dmncheck.feel.ExpressionTypes.DOUBLE;
+import static de.redsix.dmncheck.feel.ExpressionTypes.INTEGER;
+import static de.redsix.dmncheck.feel.ExpressionTypes.LONG;
+import static de.redsix.dmncheck.feel.ExpressionTypes.TOP;
+
+@org.checkerframework.framework.qual.AnnotatedFor("org.checkerframework.checker.nullness.NullnessChecker")
+public abstract class ExpressionType {
+
+    public interface Cases<R> {
+
+        @org.checkerframework.dataflow.qual.Pure
+        R TOP();
+
+        @org.checkerframework.dataflow.qual.Pure
+        R STRING();
+
+        @org.checkerframework.dataflow.qual.Pure
+        R BOOLEAN();
+
+        @org.checkerframework.dataflow.qual.Pure
+        R INTEGER();
+
+        @org.checkerframework.dataflow.qual.Pure
+        R LONG();
+
+        @org.checkerframework.dataflow.qual.Pure
+        R DOUBLE();
+
+        @org.checkerframework.dataflow.qual.Pure
+        R DATE();
+
+        @org.checkerframework.dataflow.qual.Pure
+        R ENUM(String className);
+
+        @org.checkerframework.dataflow.qual.Pure
+        R ITEMDEFINITION(ItemDefinition itemDefinition);
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    public abstract <R> R match(ExpressionType.Cases<R> cases);
+
+    @org.checkerframework.dataflow.qual.Pure
+    public abstract int hashCode();
+
+    @org.checkerframework.dataflow.qual.Pure
+    public abstract boolean equals(@org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull Object obj);
+
+    @org.checkerframework.dataflow.qual.Pure
+    public abstract String toString();
+
+    public static  @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull boolean isNumeric(final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ExpressionType givenType) {
+        return !TOP().equals(givenType) && Arrays.asList(INTEGER(), LONG(), DOUBLE()).contains(givenType);
+    }
+
+    public  @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull boolean isSubtypeOf(final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ExpressionType supertype) {
+        return reflexivity(this, supertype) || TOPisTopElement(supertype) || INTEGERsubtypeOfLONG(this, supertype) || INTEGERsubtypeOfDOUBLE(this, supertype);
+    }
+
+    @org.checkerframework.dataflow.qual.Pure
+    private  @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull boolean reflexivity(final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ExpressionType subtype, final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ExpressionType supertype) {
+        return subtype.equals(supertype);
+    }
+
+    private  @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull boolean TOPisTopElement(final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ExpressionType supertype) {
+        return TOP().equals(supertype);
+    }
+
+    private  @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull boolean INTEGERsubtypeOfLONG(final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ExpressionType subtype, final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ExpressionType supertype) {
+        return INTEGER().equals(subtype) && LONG().equals(supertype);
+    }
+
+    private  @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull boolean INTEGERsubtypeOfDOUBLE(final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ExpressionType subtype, final @org.checkerframework.checker.initialization.qual.Initialized @org.checkerframework.checker.nullness.qual.NonNull ExpressionType supertype) {
+        return INTEGER().equals(subtype) && DOUBLE().equals(supertype);
+    }
+}
