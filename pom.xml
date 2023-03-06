@@ -264,7 +264,7 @@
                                         <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
                                         <arg>-Ainfer=ajava</arg>
                                         <arg>-Awarns</arg>
-                                        <arg>-Aajava=/tmp/WPITEMP-dmn-check/</arg>
+                                        <arg>-Aajava=/tmp/WPITEMP-dmn-check-2/server/</arg>
                                         <arg>-AshowPrefixInWarningMessages</arg>
                                     </compilerArgs>
 
