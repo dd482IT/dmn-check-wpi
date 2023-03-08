@@ -1,0 +1,56 @@
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/core/src/main/java/de/redsix/dmncheck/validators/core/ValidationContext.java:[25,49] [nullness:return] incompatible types in return.
+  type of expression: U[ extends @Initialized @Nullable Object super @Initialized @Nullable Void]
+  method return type: U[ extends @Initialized @Nullable Object super @Initialized @NonNull Void]
+
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/feel/ExpressionType.java:[35,42] [nullness:override.param] Incompatible parameter type for obj.
+  found   : @Initialized @NonNull Object
+  required: @Initialized @Nullable Object
+  Consequence: method in @Initialized @NonNull ExpressionType
+    @Initialized @NonNull boolean equals(@Initialized @NonNull ExpressionType this, @Initialized @NonNull Object p0)
+  cannot override method in @Initialized @NonNull Object
+    @Initialized @NonNull boolean equals(@Initialized @NonNull Object this, @Initialized @Nullable Object p0)
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/util/Either.java:[43,42] [nullness:override.param] Incompatible parameter type for obj.
+  found   : @Initialized @NonNull Object
+  required: @Initialized @Nullable Object
+  Consequence: method in @Initialized @NonNull Either<A extends @Initialized @Nullable Object, B extends @Initialized @Nullable Object>
+    @Initialized @NonNull boolean equals(@Initialized @NonNull Either<A extends @Initialized @Nullable Object, B extends @Initialized @Nullable Object> this, @Initialized @NonNull Object p0)
+  cannot override method in @Initialized @NonNull Object
+    @Initialized @NonNull boolean equals(@Initialized @NonNull Object this, @Initialized @Nullable Object p0)
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/feel/FeelExpression.java:[84,42] [nullness:override.param] Incompatible parameter type for obj.
+  found   : @Initialized @NonNull Object
+  required: @Initialized @Nullable Object
+  Consequence: method in @Initialized @NonNull FeelExpression
+    @Initialized @NonNull boolean equals(@Initialized @NonNull FeelExpression this, @Initialized @NonNull Object p0)
+  cannot override method in @Initialized @NonNull Object
+    @Initialized @NonNull boolean equals(@Initialized @NonNull Object this, @Initialized @Nullable Object p0)
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/validators/InputTypeDeclarationValidator.java:[10,41] [regex:purity.not.deterministic.not.sideeffectfree.call] call to non-deterministic side-effecting inputExpression.getTypeRef not allowed in deterministic side-effect-free method
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/validators/InputTypeDeclarationValidator.java:[10,41] [keyfor:purity.not.deterministic.not.sideeffectfree.call] call to non-deterministic side-effecting inputExpression.getTypeRef not allowed in deterministic side-effect-free method
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/validators/InputTypeDeclarationValidator.java:[10,41] [nullness:purity.not.deterministic.not.sideeffectfree.call] call to non-deterministic side-effecting inputExpression.getTypeRef not allowed in deterministic side-effect-free method
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/validators/InputTypeDeclarationValidator.java:[10,41] [formatter:purity.not.deterministic.not.sideeffectfree.call] call to non-deterministic side-effecting inputExpression.getTypeRef not allowed in deterministic side-effect-free method
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/validators/OutputTypeDeclarationValidator.java:[10,32] [regex:purity.not.deterministic.not.sideeffectfree.call] call to non-deterministic side-effecting output.getTypeRef not allowed in deterministic side-effect-free method
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/validators/OutputTypeDeclarationValidator.java:[10,32] [keyfor:purity.not.deterministic.not.sideeffectfree.call] call to non-deterministic side-effecting output.getTypeRef not allowed in deterministic side-effect-free method
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/validators/OutputTypeDeclarationValidator.java:[10,32] [nullness:purity.not.deterministic.not.sideeffectfree.call] call to non-deterministic side-effecting output.getTypeRef not allowed in deterministic side-effect-free method
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/validators/OutputTypeDeclarationValidator.java:[10,32] [formatter:purity.not.deterministic.not.sideeffectfree.call] call to non-deterministic side-effecting output.getTypeRef not allowed in deterministic side-effect-free method
+
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/server/src/main/java/de/redsix/dmncheck/server/ValidationServer.java:[58,55] [nullness:argument] incompatible argument for parameter message of nullsafeError.
+  found   : @Initialized @Nullable String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/server/src/main/java/de/redsix/dmncheck/server/ValidationServer.java:[60,143] [nullness:argument] incompatible argument for parameter message of nullsafeError.
+  found   : @Initialized @Nullable String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/server/src/main/java/de/redsix/dmncheck/server/ValidationServer.java:[62,55] [nullness:argument] incompatible argument for parameter message of nullsafeError.
+  found   : @Initialized @Nullable String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/server/src/main/java/de/redsix/dmncheck/server/ValidationServer.java:[64,114] [nullness:argument] incompatible argument for parameter message of nullsafeError.
+  found   : @Initialized @Nullable String
+  required: @Initialized @NonNull String
+
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/plugin-base/src/main/java/de/redsix/dmncheck/plugin/PluginBase.java:[120,65] [nullness:argument] incompatible argument for parameter packages of getValidators.
+  found   : @Initialized @NonNull String @Initialized @NonNull []
+  required: @Initialized @NonNull String @FBCBottom @Nullable []
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/plugin-base/src/main/java/de/redsix/dmncheck/plugin/PluginBase.java:[120,88] [nullness:argument] incompatible argument for parameter classes of getValidators.
+  found   : @Initialized @NonNull String @Initialized @NonNull []
+  required: @Initialized @NonNull String @FBCBottom @Nullable []
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/plugin-base/src/main/java/de/redsix/dmncheck/plugin/PluginBase.java:[133,50] [nullness:assignment] incompatible types in assignment.
+  found   : @Initialized @NonNull URLClassLoader
+  required: @FBCBottom @MonotonicNonNull ClassLoader
