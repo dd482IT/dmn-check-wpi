@@ -210,10 +210,11 @@
 
                                 <configuration>
                                     <useIncrementalCompilation>false</useIncrementalCompilation>
+                                    <!--
                                     <annotationProcessors>
                                         <annotationProcessor>org.derive4j.processor.DerivingProcessor</annotationProcessor>
                                     </annotationProcessors>
-
+                                    
                                     <annotationProcessorPaths>
                                         <path>
                                             <groupId>org.derive4j</groupId>
@@ -221,6 +222,7 @@
                                             <version>${derive4j.version}</version>
                                         </path>
                                     </annotationProcessorPaths>
+                                    -->
                                 </configuration>
                             </execution>
 
@@ -262,9 +264,9 @@
                                         <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED</arg>
                                         <arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED</arg>
                                         <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
-                                        <arg>-Ainfer=ajava</arg>
+                                        <!-- <arg>-Ainfer=ajava</arg> -->
                                         <arg>-Awarns</arg>
-                                        <arg>-Aajava=/tmp/WPITEMP-dmn-check-2/server/</arg>
+                                        <arg>-Aajava=/tmp/dmn-check-ajava/cli:/tmp/dmn-check-ajava/core:/tmp/dmn-check-ajava/maven-plugin:/tmp/dmn-check-ajava/plugin-base:/tmp/dmn-check-ajava/server:/tmp/dmn-check-ajava/validators</arg>
                                         <arg>-AshowPrefixInWarningMessages</arg>
                                     </compilerArgs>
 
