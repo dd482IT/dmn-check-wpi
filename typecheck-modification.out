@@ -1,0 +1,57 @@
+This project is a multi-project where no single src folder is found. Therefore, I collected all the ajava files per sub project and compiled to get these warnings with the line below.
+                                        <arg>-Aajava=/tmp/dmn-check-ajava/cli:/tmp/dmn-check-ajava/core:/tmp/dmn-check-ajava/maven-plugin:/tmp/dmn-check-ajava/plugin-base:/tmp/dmn-check-ajava/server:/tmp/dmn-check-ajava/validators</arg>
+
+
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/core/src/main/java/de/redsix/dmncheck/validators/core/ValidationContext.java:[25,49] [nullness:return] incompatible types in return.
+  type of expression: U[ extends @Initialized @Nullable Object super @Initialized @Nullable Void]
+  method return type: U[ extends @Initialized @Nullable Object super @Initialized @NonNull Void]
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/validators/TypeValidator.java:[27,91] [nullness:argument] incompatible argument for parameter topLevelExpressionLanguage of TopLevelExpressionLanguage.
+  found   : null (NullType)
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/feel/ExpressionType.java:[35,42] [nullness:override.param] Incompatible parameter type for obj.
+  found   : @Initialized @NonNull Object
+  required: @Initialized @Nullable Object
+  Consequence: method in @Initialized @NonNull ExpressionType
+    @Initialized @NonNull boolean equals(@Initialized @NonNull ExpressionType this, @Initialized @NonNull Object p0)
+  cannot override method in @Initialized @NonNull Object
+    @Initialized @NonNull boolean equals(@Initialized @NonNull Object this, @Initialized @Nullable Object p0)
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/util/Either.java:[43,42] [nullness:override.param] Incompatible parameter type for obj.
+  found   : @Initialized @NonNull Object
+  required: @Initialized @Nullable Object
+  Consequence: method in @Initialized @NonNull Either<A extends @Initialized @Nullable Object, B extends @Initialized @Nullable Object>
+    @Initialized @NonNull boolean equals(@Initialized @NonNull Either<A extends @Initialized @Nullable Object, B extends @Initialized @Nullable Object> this, @Initialized @NonNull Object p0)
+  cannot override method in @Initialized @NonNull Object
+    @Initialized @NonNull boolean equals(@Initialized @NonNull Object this, @Initialized @Nullable Object p0)
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/feel/FeelExpression.java:[84,42] [nullness:override.param] Incompatible parameter type for obj.
+  found   : @Initialized @NonNull Object
+  required: @Initialized @Nullable Object
+  Consequence: method in @Initialized @NonNull FeelExpression
+    @Initialized @NonNull boolean equals(@Initialized @NonNull FeelExpression this, @Initialized @NonNull Object p0)
+  cannot override method in @Initialized @NonNull Object
+    @Initialized @NonNull boolean equals(@Initialized @NonNull Object this, @Initialized @Nullable Object p0)
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/util/ValidatorLoader.java:[23,35] [nullness:initialization.static.field.uninitialized] static field validators not initialized
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/util/ValidatorLoader.java:[30,29] [nullness:argument] incompatible argument for parameter packages of getValidators.
+  found   : null (NullType)
+  required: @Initialized @NonNull String @Initialized @NonNull []
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/util/ValidatorLoader.java:[30,35] [nullness:argument] incompatible argument for parameter classes of getValidators.
+  found   : null (NullType)
+  required: @Initialized @NonNull String @Initialized @NonNull []
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/validators/ConnectedRequirementGraphValidator.java:[28,99] [nullness:argument] incompatible argument for parameter topLevelExpressionLanguage of TopLevelExpressionLanguage.
+  found   : null (NullType)
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/util/ProjectClassLoader.java:[9,23] [nullness:initialization.field.uninitialized] the default constructor does not initialize field classLoader
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/validators/ShadowedRuleValidator.java:[26,99] [nullness:argument] incompatible argument for parameter topLevelExpressionLanguage of TopLevelExpressionLanguage.
+  found   : null (NullType)
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/server/src/main/java/de/redsix/dmncheck/server/ValidationServer.java:[58,55] [nullness:argument] incompatible argument for parameter message of nullsafeError.
+  found   : @Initialized @Nullable String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/server/src/main/java/de/redsix/dmncheck/server/ValidationServer.java:[60,143] [nullness:argument] incompatible argument for parameter message of nullsafeError.
+  found   : @Initialized @Nullable String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/server/src/main/java/de/redsix/dmncheck/server/ValidationServer.java:[62,55] [nullness:argument] incompatible argument for parameter message of nullsafeError.
+  found   : @Initialized @Nullable String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/server/src/main/java/de/redsix/dmncheck/server/ValidationServer.java:[64,114] [nullness:argument] incompatible argument for parameter message of nullsafeError.
+  found   : @Initialized @Nullable String
+  required: @Initialized @NonNull String
