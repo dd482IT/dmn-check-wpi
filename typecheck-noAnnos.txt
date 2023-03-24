@@ -1,83 +1,3 @@
-[INFO] Scanning for projects...
-[INFO] ------------------------------------------------------------------------
-[INFO] Reactor Build Order:
-[INFO] 
-[INFO] dmn-check                                                          [pom]
-[INFO] dmn-check-core                                                     [jar]
-[INFO] dmn-check-validators                                               [jar]
-[INFO] dmn-check-server                                                   [jar]
-[INFO] dmn-check-plugin-base                                              [jar]
-[INFO] dmn-check-maven-plugin                                    [maven-plugin]
-[INFO] cli                                                                [jar]
-[INFO] 
-[INFO] ------------------------< de.redsix:dmn-check >-------------------------
-[INFO] Building dmn-check 1.3.0-SNAPSHOT                                  [1/7]
-[INFO]   from pom.xml
-[INFO] --------------------------------[ pom ]---------------------------------
-[INFO] 
-[INFO] --- enforcer:3.1.0:enforce (enforce-maven) @ dmn-check ---
-[INFO] 
-[INFO] --- jacoco:0.8.8:prepare-agent (prepare-agent) @ dmn-check ---
-[INFO] argLine set to -javaagent:/Users/daniel/.m2/repository/org/jacoco/org.jacoco.agent/0.8.8/org.jacoco.agent-0.8.8-runtime.jar=destfile=/Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/target/jacoco.exec,excludes=**/ExpressionTypes.*:**/ExpressionTypes$*.*:**/FeelExpressions.*:**/FeelExpressions$*.*:**/Eithers.*:**/Eithers$*.*
-[INFO] 
-[INFO] --- build-helper:3.3.0:add-source (test) @ dmn-check ---
-[INFO] Source directory: /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/target/generated-sources added.
-[INFO] 
-[INFO] --- compiler:3.10.1:compile (default-compile) @ dmn-check ---
-[INFO] No sources to compile
-[INFO] 
-[INFO] --- compiler:3.10.1:compile (verify-with-checkerframework) @ dmn-check ---
-[INFO] No sources to compile
-[INFO] 
-[INFO] ----------------------< de.redsix:dmn-check-core >----------------------
-[INFO] Building dmn-check-core 1.3.0-SNAPSHOT                             [2/7]
-[INFO]   from core/pom.xml
-[INFO] --------------------------------[ jar ]---------------------------------
-[INFO] 
-[INFO] --- enforcer:3.1.0:enforce (enforce-maven) @ dmn-check-core ---
-[INFO] 
-[INFO] --- jacoco:0.8.8:prepare-agent (prepare-agent) @ dmn-check-core ---
-[INFO] argLine set to -javaagent:/Users/daniel/.m2/repository/org/jacoco/org.jacoco.agent/0.8.8/org.jacoco.agent-0.8.8-runtime.jar=destfile=/Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/core/target/jacoco.exec,excludes=**/ExpressionTypes.*:**/ExpressionTypes$*.*:**/FeelExpressions.*:**/FeelExpressions$*.*:**/Eithers.*:**/Eithers$*.*
-[INFO] 
-[INFO] --- build-helper:3.3.0:add-source (test) @ dmn-check-core ---
-[INFO] Source directory: /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/core/target/generated-sources added.
-[INFO] 
-[INFO] --- resources:3.3.0:resources (default-resources) @ dmn-check-core ---
-[INFO] skip non existing resourceDirectory /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/core/src/main/resources
-[INFO] 
-[INFO] --- compiler:3.10.1:compile (default-compile) @ dmn-check-core ---
-[INFO] Nothing to compile - all classes are up to date
-[INFO] 
-[INFO] --- compiler:3.10.1:compile (verify-with-checkerframework) @ dmn-check-core ---
-[INFO] Nothing to compile - all classes are up to date
-[INFO] 
-[INFO] -------------------< de.redsix:dmn-check-validators >-------------------
-[INFO] Building dmn-check-validators 1.3.0-SNAPSHOT                       [3/7]
-[INFO]   from validators/pom.xml
-[INFO] --------------------------------[ jar ]---------------------------------
-[INFO] 
-[INFO] --- enforcer:3.1.0:enforce (enforce-maven) @ dmn-check-validators ---
-[INFO] 
-[INFO] --- jacoco:0.8.8:prepare-agent (prepare-agent) @ dmn-check-validators ---
-[INFO] argLine set to -javaagent:/Users/daniel/.m2/repository/org/jacoco/org.jacoco.agent/0.8.8/org.jacoco.agent-0.8.8-runtime.jar=destfile=/Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/target/jacoco.exec,excludes=**/ExpressionTypes.*:**/ExpressionTypes$*.*:**/FeelExpressions.*:**/FeelExpressions$*.*:**/Eithers.*:**/Eithers$*.*
-[INFO] 
-[INFO] --- build-helper:3.3.0:add-source (test) @ dmn-check-validators ---
-[INFO] Source directory: /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/target/generated-sources added.
-[INFO] 
-[INFO] --- resources:3.3.0:resources (default-resources) @ dmn-check-validators ---
-[INFO] skip non existing resourceDirectory /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/resources
-[INFO] 
-[INFO] --- compiler:3.10.1:compile (default-compile) @ dmn-check-validators ---
-[INFO] Compiling 38 source files to /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/target/classes
-[INFO] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/validators/TypeValidator.java: Some input files use unchecked or unsafe operations.
-[INFO] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/validators/TypeValidator.java: Recompile with -Xlint:unchecked for details.
-[INFO] 
-[INFO] --- compiler:3.10.1:compile (verify-with-checkerframework) @ dmn-check-validators ---
-[INFO] Changes detected - recompiling the module!
-[INFO] Compiling 38 source files to /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/target/classes
-[INFO] -------------------------------------------------------------
-[ERROR] COMPILATION ERROR : 
-[INFO] -------------------------------------------------------------
 [ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/validators/TypeValidator.java:[27,91] error: [argument] incompatible argument for parameter topLevelExpressionLanguage of TopLevelExpressionLanguage.
   found   : null (NullType)
   required: @Initialized @NonNull String
@@ -178,24 +98,6 @@
 [ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/validators/InputValuesTypeValidator.java:[13,7] error: [type.checking.not.run] RegexChecker did not run because of a previous error issued by javac
 [ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/validators/InputValuesTypeValidator.java:[13,7] error: [type.checking.not.run] NullnessChecker did not run because of a previous error issued by javac
 [ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/validators/InputValuesTypeValidator.java:[13,7] error: [type.checking.not.run] FormatterChecker did not run because of a previous error issued by javac
-[INFO] 98 errors 
-[INFO] -------------------------------------------------------------
-[INFO] ------------------------------------------------------------------------
-[INFO] Reactor Summary for dmn-check 1.3.0-SNAPSHOT:
-[INFO] 
-[INFO] dmn-check .......................................... SUCCESS [  0.351 s]
-[INFO] dmn-check-core ..................................... SUCCESS [  0.080 s]
-[INFO] dmn-check-validators ............................... FAILURE [  4.298 s]
-[INFO] dmn-check-server ................................... SKIPPED
-[INFO] dmn-check-plugin-base .............................. SKIPPED
-[INFO] dmn-check-maven-plugin ............................. SKIPPED
-[INFO] cli ................................................ SKIPPED
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.782 s
-[INFO] Finished at: 2023-03-24T12:53:51-04:00
-[INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.10.1:compile (verify-with-checkerframework) on project dmn-check-validators: Compilation failure: Compilation failure: 
 [ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/validators/TypeValidator.java:[27,91] error: [argument] incompatible argument for parameter topLevelExpressionLanguage of TopLevelExpressionLanguage.
 [ERROR]   found   : null (NullType)
@@ -297,13 +199,3 @@
 [ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/validators/InputValuesTypeValidator.java:[13,7] error: [type.checking.not.run] RegexChecker did not run because of a previous error issued by javac
 [ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/validators/InputValuesTypeValidator.java:[13,7] error: [type.checking.not.run] NullnessChecker did not run because of a previous error issued by javac
 [ERROR] /Users/daniel/Documents/njit/WPI-Research/experiments-live/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/validators/InputValuesTypeValidator.java:[13,7] error: [type.checking.not.run] FormatterChecker did not run because of a previous error issued by javac
-[ERROR] -> [Help 1]
-[ERROR] 
-[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR] 
-[ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
-[ERROR] 
-[ERROR] After correcting the problems, you can resume the build with the command
-[ERROR]   mvn <args> -rf :dmn-check-validators
