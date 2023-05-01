@@ -56,8 +56,4 @@ org.checkerframework.framework.qual.EnsuresQualiferIf
 @org.checkerframework.checker.regex.qual.Regex
 @PolyRegex
 @org.checkerframework.checker.regex.qual.PolyRegex
-@UnknownRegex
-@org.checkerframework.checker.regex.qual.UnknownRegex
-@RegexBottom
-@org.checkerframework.checker.regex.qual.RegexBottom
 
