@@ -1,0 +1,234 @@
+  ~/Doc/N/W/e/tmp-storage/dmn-check-wpi   unannotated +1 !1 ?1 ❯ mvn compile -Pcheckerframework                                                                    ✘ INT  12:01:56 PM
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO]
+[INFO] dmn-check                                                          [pom]
+[INFO] dmn-check-core                                                     [jar]
+[INFO] dmn-check-validators                                               [jar]
+[INFO] dmn-check-server                                                   [jar]
+[INFO] dmn-check-plugin-base                                              [jar]
+[INFO] dmn-check-maven-plugin                                    [maven-plugin]
+[INFO] cli                                                                [jar]
+[INFO]
+[INFO] ------------------------< de.redsix:dmn-check >-------------------------
+[INFO] Building dmn-check 1.3.0-SNAPSHOT                                  [1/7]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO]
+[INFO] --- enforcer:3.1.0:enforce (enforce-maven) @ dmn-check ---
+[INFO]
+[INFO] --- jacoco:0.8.8:prepare-agent (prepare-agent) @ dmn-check ---
+[INFO] argLine set to -javaagent:/Users/daniel/.m2/repository/org/jacoco/org.jacoco.agent/0.8.8/org.jacoco.agent-0.8.8-runtime.jar=destfile=/Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/target/jacoco.exec,excludes=**/ExpressionTypes.*:**/ExpressionTypes$*.*:**/FeelExpressions.*:**/FeelExpressions$*.*:**/Eithers.*:**/Eithers$*.*
+[INFO]
+[INFO] --- build-helper:3.3.0:add-source (test) @ dmn-check ---
+[INFO] Source directory: /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/target/generated-sources added.
+[INFO]
+[INFO] --- compiler:3.10.1:compile (default-compile) @ dmn-check ---
+[INFO] No sources to compile
+[INFO]
+[INFO] --- compiler:3.10.1:compile (verify-with-checkerframework) @ dmn-check ---
+[INFO] No sources to compile
+[INFO]
+[INFO] ----------------------< de.redsix:dmn-check-core >----------------------
+[INFO] Building dmn-check-core 1.3.0-SNAPSHOT                             [2/7]
+[INFO]   from core/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- enforcer:3.1.0:enforce (enforce-maven) @ dmn-check-core ---
+[INFO]
+[INFO] --- jacoco:0.8.8:prepare-agent (prepare-agent) @ dmn-check-core ---
+[INFO] argLine set to -javaagent:/Users/daniel/.m2/repository/org/jacoco/org.jacoco.agent/0.8.8/org.jacoco.agent-0.8.8-runtime.jar=destfile=/Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/core/target/jacoco.exec,excludes=**/ExpressionTypes.*:**/ExpressionTypes$*.*:**/FeelExpressions.*:**/FeelExpressions$*.*:**/Eithers.*:**/Eithers$*.*
+[INFO]
+[INFO] --- build-helper:3.3.0:add-source (test) @ dmn-check-core ---
+[INFO] Source directory: /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/core/target/generated-sources added.
+[INFO]
+[INFO] --- resources:3.3.0:resources (default-resources) @ dmn-check-core ---
+[INFO] skip non existing resourceDirectory /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/core/src/main/resources
+[INFO]
+[INFO] --- compiler:3.10.1:compile (default-compile) @ dmn-check-core ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO]
+[INFO] --- compiler:3.10.1:compile (verify-with-checkerframework) @ dmn-check-core ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO]
+[INFO] -------------------< de.redsix:dmn-check-validators >-------------------
+[INFO] Building dmn-check-validators 1.3.0-SNAPSHOT                       [3/7]
+[INFO]   from validators/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- enforcer:3.1.0:enforce (enforce-maven) @ dmn-check-validators ---
+[INFO]
+[INFO] --- jacoco:0.8.8:prepare-agent (prepare-agent) @ dmn-check-validators ---
+[INFO] argLine set to -javaagent:/Users/daniel/.m2/repository/org/jacoco/org.jacoco.agent/0.8.8/org.jacoco.agent-0.8.8-runtime.jar=destfile=/Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/validators/target/jacoco.exec,excludes=**/ExpressionTypes.*:**/ExpressionTypes$*.*:**/FeelExpressions.*:**/FeelExpressions$*.*:**/Eithers.*:**/Eithers$*.*
+[INFO]
+[INFO] --- build-helper:3.3.0:add-source (test) @ dmn-check-validators ---
+[INFO] Source directory: /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/validators/target/generated-sources added.
+[INFO]
+[INFO] --- resources:3.3.0:resources (default-resources) @ dmn-check-validators ---
+[INFO] skip non existing resourceDirectory /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/validators/src/main/resources
+[INFO]
+[INFO] --- compiler:3.10.1:compile (default-compile) @ dmn-check-validators ---
+[INFO] Compiling 3 source files to /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/validators/target/classes
+[INFO]
+[INFO] --- compiler:3.10.1:compile (verify-with-checkerframework) @ dmn-check-validators ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 38 source files to /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/validators/target/classes
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/feel/FeelExpression.java:[84,42] [override.param] Incompatible parameter type for obj.
+  found   : @Initialized @NonNull Object
+  required: @Initialized @Nullable Object
+  Consequence: method in @Initialized @NonNull FeelExpression
+    @Initialized @NonNull boolean equals(@Initialized @NonNull FeelExpression this, @Initialized @NonNull Object p0)
+  cannot override method in @Initialized @NonNull Object
+    @Initialized @NonNull boolean equals(@Initialized @NonNull Object this, @Initialized @Nullable Object p0)
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/util/Either.java:[43,42] [override.param] Incompatible parameter type for obj.
+  found   : @Initialized @NonNull Object
+  required: @Initialized @Nullable Object
+  Consequence: method in @Initialized @NonNull Either<A extends @Initialized @Nullable Object, B extends @Initialized @Nullable Object>
+    @Initialized @NonNull boolean equals(@Initialized @NonNull Either<A extends @Initialized @Nullable Object, B extends @Initialized @Nullable Object> this, @Initialized @NonNull Object p0)
+  cannot override method in @Initialized @NonNull Object
+    @Initialized @NonNull boolean equals(@Initialized @NonNull Object this, @Initialized @Nullable Object p0)
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/feel/ExpressionType.java:[35,42] [override.param] Incompatible parameter type for obj.
+  found   : @Initialized @NonNull Object
+  required: @Initialized @Nullable Object
+  Consequence: method in @Initialized @NonNull ExpressionType
+    @Initialized @NonNull boolean equals(@Initialized @NonNull ExpressionType this, @Initialized @NonNull Object p0)
+  cannot override method in @Initialized @NonNull Object
+    @Initialized @NonNull boolean equals(@Initialized @NonNull Object this, @Initialized @Nullable Object p0)
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/validators/TypeValidator.java:[27,91] [argument] incompatible argument for parameter topLevelExpressionLanguage of TopLevelExpressionLanguage.
+  found   : null (NullType)
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/validators/ConnectedRequirementGraphValidator.java:[28,99] [argument] incompatible argument for parameter topLevelExpressionLanguage of TopLevelExpressionLanguage.
+  found   : null (NullType)
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/validators/ShadowedRuleValidator.java:[26,99] [argument] incompatible argument for parameter topLevelExpressionLanguage of TopLevelExpressionLanguage.
+  found   : null (NullType)
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/util/ValidatorLoader.java:[23,35] [initialization.static.field.uninitialized] static field validators not initialized
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/util/ValidatorLoader.java:[30,29] [argument] incompatible argument for parameter packages of getValidators.
+  found   : null (NullType)
+  required: @Initialized @NonNull String @Initialized @NonNull []
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/util/ValidatorLoader.java:[30,35] [argument] incompatible argument for parameter classes of getValidators.
+  found   : null (NullType)
+  required: @Initialized @NonNull String @Initialized @NonNull []
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/validators/src/main/java/de/redsix/dmncheck/util/ProjectClassLoader.java:[9,23] [initialization.field.uninitialized] the default constructor does not initialize field classLoader
+[INFO]
+[INFO] ---------------------< de.redsix:dmn-check-server >---------------------
+[INFO] Building dmn-check-server 1.3.0-SNAPSHOT                           [4/7]
+[INFO]   from server/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- enforcer:3.1.0:enforce (enforce-maven) @ dmn-check-server ---
+[INFO]
+[INFO] --- jacoco:0.8.8:prepare-agent (prepare-agent) @ dmn-check-server ---
+[INFO] argLine set to -javaagent:/Users/daniel/.m2/repository/org/jacoco/org.jacoco.agent/0.8.8/org.jacoco.agent-0.8.8-runtime.jar=destfile=/Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/server/target/jacoco.exec,excludes=**/ExpressionTypes.*:**/ExpressionTypes$*.*:**/FeelExpressions.*:**/FeelExpressions$*.*:**/Eithers.*:**/Eithers$*.*
+[INFO]
+[INFO] --- build-helper:3.3.0:add-source (test) @ dmn-check-server ---
+[INFO] Source directory: /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/server/target/generated-sources added.
+[INFO]
+[INFO] --- resources:3.3.0:resources (default-resources) @ dmn-check-server ---
+[INFO] skip non existing resourceDirectory /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/server/src/main/resources
+[INFO]
+[INFO] --- compiler:3.10.1:compile (default-compile) @ dmn-check-server ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO]
+[INFO] --- compiler:3.10.1:compile (verify-with-checkerframework) @ dmn-check-server ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 2 source files to /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/server/target/classes
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/server/src/main/java/de/redsix/dmncheck/server/ValidationServer.java:[58,55] [argument] incompatible argument for parameter message of nullsafeError.
+  found   : @Initialized @Nullable String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/server/src/main/java/de/redsix/dmncheck/server/ValidationServer.java:[60,143] [argument] incompatible argument for parameter message of nullsafeError.
+  found   : @Initialized @Nullable String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/server/src/main/java/de/redsix/dmncheck/server/ValidationServer.java:[62,55] [argument] incompatible argument for parameter message of nullsafeError.
+  found   : @Initialized @Nullable String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/server/src/main/java/de/redsix/dmncheck/server/ValidationServer.java:[64,114] [argument] incompatible argument for parameter message of nullsafeError.
+  found   : @Initialized @Nullable String
+  required: @Initialized @NonNull String
+[INFO]
+[INFO] ------------------< de.redsix:dmn-check-plugin-base >-------------------
+[INFO] Building dmn-check-plugin-base 1.3.0-SNAPSHOT                      [5/7]
+[INFO]   from plugin-base/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- enforcer:3.1.0:enforce (enforce-maven) @ dmn-check-plugin-base ---
+[INFO]
+[INFO] --- jacoco:0.8.8:prepare-agent (prepare-agent) @ dmn-check-plugin-base ---
+[INFO] argLine set to -javaagent:/Users/daniel/.m2/repository/org/jacoco/org.jacoco.agent/0.8.8/org.jacoco.agent-0.8.8-runtime.jar=destfile=/Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/plugin-base/target/jacoco.exec,excludes=**/ExpressionTypes.*:**/ExpressionTypes$*.*:**/FeelExpressions.*:**/FeelExpressions$*.*:**/Eithers.*:**/Eithers$*.*
+[INFO]
+[INFO] --- build-helper:3.3.0:add-source (test) @ dmn-check-plugin-base ---
+[INFO] Source directory: /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/plugin-base/target/generated-sources added.
+[INFO]
+[INFO] --- resources:3.3.0:resources (default-resources) @ dmn-check-plugin-base ---
+[INFO] skip non existing resourceDirectory /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/plugin-base/src/main/resources
+[INFO]
+[INFO] --- compiler:3.10.1:compile (default-compile) @ dmn-check-plugin-base ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO]
+[INFO] --- compiler:3.10.1:compile (verify-with-checkerframework) @ dmn-check-plugin-base ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 2 source files to /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/plugin-base/target/classes
+[INFO]
+[INFO] ------------------< de.redsix:dmn-check-maven-plugin >------------------
+[INFO] Building dmn-check-maven-plugin 1.3.0-SNAPSHOT                     [6/7]
+[INFO]   from maven-plugin/pom.xml
+[INFO] ----------------------------[ maven-plugin ]----------------------------
+[INFO]
+[INFO] --- enforcer:3.1.0:enforce (enforce-maven) @ dmn-check-maven-plugin ---
+[INFO]
+[INFO] --- jacoco:0.8.8:prepare-agent (prepare-agent) @ dmn-check-maven-plugin ---
+[INFO] argLine set to -javaagent:/Users/daniel/.m2/repository/org/jacoco/org.jacoco.agent/0.8.8/org.jacoco.agent-0.8.8-runtime.jar=destfile=/Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/maven-plugin/target/jacoco.exec,excludes=**/ExpressionTypes.*:**/ExpressionTypes$*.*:**/FeelExpressions.*:**/FeelExpressions$*.*:**/Eithers.*:**/Eithers$*.*
+[INFO]
+[INFO] --- build-helper:3.3.0:add-source (test) @ dmn-check-maven-plugin ---
+[INFO] Source directory: /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/maven-plugin/target/generated-sources added.
+[INFO]
+[INFO] --- resources:3.3.0:resources (default-resources) @ dmn-check-maven-plugin ---
+[INFO] skip non existing resourceDirectory /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/maven-plugin/src/main/resources
+[INFO]
+[INFO] --- compiler:3.10.1:compile (default-compile) @ dmn-check-maven-plugin ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO]
+[INFO] --- compiler:3.10.1:compile (verify-with-checkerframework) @ dmn-check-maven-plugin ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/maven-plugin/target/classes
+[INFO]
+[INFO] ---------------------------< de.redsix:cli >----------------------------
+[INFO] Building cli 1.3.0-SNAPSHOT                                        [7/7]
+[INFO]   from cli/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- enforcer:3.1.0:enforce (enforce-maven) @ cli ---
+[INFO]
+[INFO] --- jacoco:0.8.8:prepare-agent (prepare-agent) @ cli ---
+[INFO] argLine set to -javaagent:/Users/daniel/.m2/repository/org/jacoco/org.jacoco.agent/0.8.8/org.jacoco.agent-0.8.8-runtime.jar=destfile=/Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/cli/target/jacoco.exec,excludes=**/ExpressionTypes.*:**/ExpressionTypes$*.*:**/FeelExpressions.*:**/FeelExpressions$*.*:**/Eithers.*:**/Eithers$*.*
+[INFO]
+[INFO] --- build-helper:3.3.0:add-source (test) @ cli ---
+[INFO] Source directory: /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/cli/target/generated-sources added.
+[INFO]
+[INFO] --- resources:3.3.0:resources (default-resources) @ cli ---
+[INFO] skip non existing resourceDirectory /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/cli/src/main/resources
+[INFO]
+[INFO] --- compiler:3.10.1:compile (default-compile) @ cli ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO]
+[INFO] --- compiler:3.10.1:compile (verify-with-checkerframework) @ cli ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/cli/target/classes
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for dmn-check 1.3.0-SNAPSHOT:
+[INFO]
+[INFO] dmn-check .......................................... SUCCESS [  1.723 s]
+[INFO] dmn-check-core ..................................... SUCCESS [  0.316 s]
+[INFO] dmn-check-validators ............................... SUCCESS [ 40.664 s]
+[INFO] dmn-check-server ................................... SUCCESS [  9.731 s]
+[INFO] dmn-check-plugin-base .............................. SUCCESS [ 10.600 s]
+[INFO] dmn-check-maven-plugin ............................. SUCCESS [  8.767 s]
+[INFO] cli ................................................ SUCCESS [  8.942 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:20 min
+[INFO] Finished at: 2023-05-05T12:03:27-04:00
+[INFO] ------------------------------------------------------------------------
