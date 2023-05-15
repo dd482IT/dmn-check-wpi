@@ -14,7 +14,25 @@ ${BUILD_CMD} # Compile the program so that WPIOUTDIR is created.
 # Where should the output be placed at the end? This directory is also
 # used to store intermediate WPI results. The directory does not need to
 # exist. If it does exist when this script starts, it will be deleted.
-WPITEMPDIR=/tmp/WPITEMP-dmn-check/
+WPITEMPDIR=/tmp/WPITEMP-dmn-check/dmn-check-core
+
+# This project is a multi directory project. You must run wpi on each project individually. 
+# Create a root tmp directory for the project.
+# Have a sub tmp directory for each subproject, ie. 
+# dmn-check                                                       
+# dmn-check-core                                                     
+# dmn-check-validators                                               
+# dmn-check-server                                                   
+# dmn-check-plugin-base                                              
+# dmn-check-maven-plugin     
+
+# /tmp/WPITEMP-dmn-check/dmn-check-core    
+# /tmp/WPITEMP-dmn-check/dmn-check-validators          X                                                
+# /tmp/WPITEMP-dmn-check/dmn-check-server                 X                                             
+# /tmp/WPITEMP-dmn-check/dmn-check-plugin-base    X                                                     
+# /tmp/WPITEMP-dmn-check/dmn-check-maven-plugin X 
+#
+
 # Where is WPI's output placed by the Checker Framework? This is some
 # directory ending in build/whole-program-inference. For most projects,
 # this directory is just ./build/whole-program-inference .
@@ -29,6 +47,8 @@ WPITEMPDIR=/tmp/WPITEMP-dmn-check/
 # same build system (e.g., because of a project's settings.gradle file).
 
 # Program needs to compiled before running script so WPI creates this directory.
+
+# This WPI out dir needs to change to build directory found under each subproject.
 WPIOUTDIR=./core/build/whole-program-inference 
 
 # Whether to run in debug mode. In debug mode, output is printed to the terminal

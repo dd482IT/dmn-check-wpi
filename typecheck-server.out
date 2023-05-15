@@ -1,0 +1,12 @@
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/server/src/main/java/de/redsix/dmncheck/server/ValidationServer.java:[58,55] [nullness:argument] incompatible argument for parameter message of nullsafeError.
+  found   : @Initialized @Nullable String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/server/src/main/java/de/redsix/dmncheck/server/ValidationServer.java:[60,143] [nullness:argument] incompatible argument for parameter message of nullsafeError.
+  found   : @Initialized @Nullable String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/server/src/main/java/de/redsix/dmncheck/server/ValidationServer.java:[62,55] [nullness:argument] incompatible argument for parameter message of nullsafeError.
+  found   : @Initialized @Nullable String
+  required: @Initialized @NonNull String
+[WARNING] /Users/daniel/Documents/NJIT/WPI-Research/experiments-live/tmp-storage/dmn-check-wpi/server/src/main/java/de/redsix/dmncheck/server/ValidationServer.java:[64,114] [nullness:argument] incompatible argument for parameter message of nullsafeError.
+  found   : @Initialized @Nullable String
+  required: @Initialized @NonNull String
