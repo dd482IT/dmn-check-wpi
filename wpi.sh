@@ -14,7 +14,7 @@ ${BUILD_CMD} # Compile the program so that WPIOUTDIR is created.
 # Where should the output be placed at the end? This directory is also
 # used to store intermediate WPI results. The directory does not need to
 # exist. If it does exist when this script starts, it will be deleted.
-WPITEMPDIR=/tmp/WPITEMP-dmn-check/dmn-check-core
+WPITEMPDIR=$1
 
 # This project is a multi directory project. You must run wpi on each project individually. 
 # Create a root tmp directory for the project.
@@ -25,13 +25,6 @@ WPITEMPDIR=/tmp/WPITEMP-dmn-check/dmn-check-core
 # dmn-check-server                                                   
 # dmn-check-plugin-base                                              
 # dmn-check-maven-plugin     
-
-# /tmp/WPITEMP-dmn-check/dmn-check-core    
-# /tmp/WPITEMP-dmn-check/dmn-check-validators          X                                                
-# /tmp/WPITEMP-dmn-check/dmn-check-server                 X                                             
-# /tmp/WPITEMP-dmn-check/dmn-check-plugin-base    X                                                     
-# /tmp/WPITEMP-dmn-check/dmn-check-maven-plugin X 
-#
 
 # Where is WPI's output placed by the Checker Framework? This is some
 # directory ending in build/whole-program-inference. For most projects,
@@ -49,7 +42,7 @@ WPITEMPDIR=/tmp/WPITEMP-dmn-check/dmn-check-core
 # Program needs to compiled before running script so WPI creates this directory.
 
 # This WPI out dir needs to change to build directory found under each subproject.
-WPIOUTDIR=./core/build/whole-program-inference 
+WPIOUTDIR=$2 
 
 # Whether to run in debug mode. In debug mode, output is printed to the terminal
 # at the beginning of each iteration, and the diff between each pair of iterations is
@@ -61,13 +54,14 @@ DEBUG=1
 
 rm -rf ${WPITEMPDIR}
 mkdir -p ${WPITEMPDIR}
+SUBPROJECT_NAME=$(basename $WPITEMPDIR)
 
 count=1
 while : ; do
     if [[ ${DEBUG} == 1 ]]; then
 	echo "entering iteration ${count}"
     fi
-    ${BUILD_CMD}
+    ${BUILD_CMD} > typecheck-"$SUBPROJECT_NAME".out
     ${CLEAN_CMD}
     # This mkdir is needed when the project has subprojects.
     mkdir -p "${WPITEMPDIR}"
